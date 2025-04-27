@@ -59,6 +59,44 @@ def login():
     
     return render_template('login.html')
 
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        name = request.form['name']
+        
+        try:
+            # Create user in Firebase
+            user = auth.create_user(
+                email=email,
+                password=password,
+                display_name=name
+            )
+            logger.debug(f"User created in Firebase Auth: {user.uid}")
+            
+            # Store additional user data in Firestore
+            user_data = {
+                'name': name,
+                'email': email,
+                'created_at': firestore.SERVER_TIMESTAMP
+            }
+            db.collection('users').document(user.uid).set(user_data)
+            logger.debug(f"User data stored in Firestore: {user_data}")
+            
+            flash('Registration successful! Please login.')
+            return redirect(url_for('login'))
+        except Exception as e:
+            logger.error(f"Registration error: {str(e)}")
+            flash('Registration failed. Please try again.')
+            return redirect(url_for('register'))
+    
+    return render_template('register.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+    return redirect(url_for('home'))
 
 
 if __name__ == '__main__':
