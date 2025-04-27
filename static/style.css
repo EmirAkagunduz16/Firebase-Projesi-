@@ -1,0 +1,33 @@
+/* Custom styles for the login system */
+.card {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border: none;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #eee;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.alert {
+    border-radius: 0.25rem;
+}
+
+/* Custom styles for the dashboard */
+.dashboard-card {
+    margin-top: 2rem;
+}
+
+.user-info {
+    padding: 1.5rem;
+} 

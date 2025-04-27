@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Firebase Auth{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">Welcome to Your Dashboard</h3>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-success">
+                    <h4>User Information</h4>
+                    <p><strong>Email:</strong> {{ user.email }}</p>
+                    <p><strong>User ID:</strong> {{ user.uid }}</p>
+                    {% if user_data %}
+                        <p><strong>Name:</strong> {{ user_data.name }}</p>
+                        <p><strong>Account Created:</strong> {{ user_data.created_at }}</p>
+                    {% endif %}
+                </div>
+                <div class="text-center">
+                    <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
